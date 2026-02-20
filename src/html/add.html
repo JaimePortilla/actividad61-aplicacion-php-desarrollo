@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Altas</title>
+</head>
+<body>
+<div>
+	<header>
+		<h1>APLICACION CRUD VALORANT</h1>
+	</header>
+	<main>				
+	<h2>Alta</h2>
+<!--FORMULARIO DE ALTA. Al hacer click en el botón Agregar, llama a la página: add_action.php (form action="add_action.php")
+La página: add_action.php se encargará de proceder a la inserción del registro en la tabla de agentes
+-->
+
+	<form action="add_action.php" method="post">
+		<div>
+			<label for="nombre">Nombre</label>
+			<input type="text" name="nombre" id="nombre" placeholder="nombre del agente" required>
+		</div>
+		<div>
+			<label for="rol">Rol</label>
+			<select name="rol" id="rol" placeholder="rol">
+				<option value="" disabled selected>Seleccione un rol</option>
+				<option value="Duelist">Duelist</option>
+				<option value="Controller">Controller</option>
+				<option value="Sentinel">Sentinel</option>
+				<option value="Initiator">Initiator</option>
+			</select>	
+		</div>
+		<div>
+			<label for="pais">País</label>
+			<input type="text" name="pais" id="pais" placeholder="país de origen" required>
+		</div>
+		<div>
+			<label for="anio_lanzamiento">Año de lanzamiento</label>
+			<input type="number" name="anio_lanzamiento" id="anio_lanzamiento" placeholder="año de lanzamiento" required>
+		</div>
+
+		<div>
+			<label for="dificultad">Dificultad</label>
+			<input type="number" name="dificultad" id="dificultad" placeholder="dificultad (1-5)" required min="1" max="5">
+		</div>
+
+		<div>
+			<label for="ultimate">Ultimate</label>
+			<input type="text" name="ultimate" id="ultimate" placeholder="nombre del ultimate" required>
+		</div>
+
+		<div>
+			<button type="submit" name="inserta" value="si">Aceptar</button>
+			<button type="button" onclick="location.href='home.php'">Cancelar</button>
+		</div>
+	</form>
+	
+	</main>	
+	<footer>
+		<p><a href="home.php">Volver</a></p>	
+		<p><a href="logout.php">Cerrar sesión (Sign out)</a></p>
+		Created by the IES Miguel Herrero team &copy; 2026
+  	</footer>
+</div>
+</body>
+</html>
