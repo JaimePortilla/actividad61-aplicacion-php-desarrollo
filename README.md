@@ -1,7 +1,7 @@
-# 🚗 Automovilismo 2026 – Aplicación CRUD en PHP + MariaDB + Docker
+# 🎮 Valorant 2026 – Aplicación CRUD en PHP + MariaDB + Docker
 
 Aplicación web CRUD desarrollada en **PHP 8.2**, utilizando **MariaDB 11** como base de datos y **Docker** para la contenedorización completa del entorno.  
-Permite gestionar usuarios y vehículos de automovilismo moderno (año 2026).
+Permite gestionar usuarios y **agentes de Valorant** (temporada 2026).
 
 ---
 
@@ -17,54 +17,50 @@ Permite gestionar usuarios y vehículos de automovilismo moderno (año 2026).
 ---
 
 ## 📁 Estructura del proyecto
-
-```
 conf/
- └── 000-default.conf
+└── 000-default.conf
 docker-compose.yml
 Dockerfile
 .env
 sql/
- └── database.sql
+└── database.sql
 src/
- ├── add.php
- ├── add_action.php
- ├── config.php
- ├── delete.php
- ├── edit.php
- ├── edit_action.php
- ├── home.php
- ├── index.php
- ├── login.php
- ├── login_action.php
- ├── logout.php
- ├── registro.php
- └── registro_action.php
-```
-
----
+├── add.php
+├── add_action.php
+├── config.php
+├── delete.php
+├── edit.php
+├── edit_action.php
+├── home.php
+├── index.php
+├── login.php
+├── login_action.php
+├── logout.php
+├── registro.php
+└── registro_action.php
+text---
 
 ## 🗄 Base de datos
 
-El archivo `sql/database.sql` crea:
+El archivo `sql/database.sql` crea la base de datos **valorant2026** con:
 
 ### Tabla `usuarios`
 - `usuario_id` (PK)
 - `nombre_usuario`
-- `contraseña` (hash bcrypt)
+- `contraseña` (almacenada de forma segura)
 - `correo` (UNIQUE)
 - `creacion` (timestamp)
 
-### Tabla `vehiculos`
-- `vehiculo_id` (PK)
-- `marca`
-- `modelo`
-- `anio`
-- `potencia`
-- `categoria`
-- `vin` (UNIQUE)
+### Tabla `agentes` (CRUD principal)
+- `agente_id` (PK)
+- `nombre` (UNIQUE)
+- `rol` (Duelist, Controller, Sentinel, Initiator)
+- `pais`
+- `anio_lanzamiento` (numérico)
+- `dificultad` (1 = fácil → 5 = muy difícil)
+- `ultimate`
 
-Incluye datos de ejemplo para ambas tablas.
+Incluye **datos de ejemplo** para ambas tablas (10 agentes + 3 usuarios).
 
 ---
 
@@ -76,70 +72,68 @@ Debe estar en la raíz del proyecto:
 
 ```env
 MYSQL_ROOT_PASSWORD=SamuelSaez@2006
-MYSQL_DATABASE=automovilismo2026
+MYSQL_DATABASE=valorant2026
 MYSQL_USER=usuarioSaSa
 MYSQL_PASSWORD=SamuelSaez@2006
-```
 
-## ▶️ Puesta en marcha
-
+▶️ Puesta en marcha
 Ejecuta:
-
-```bash
-docker-compose up --build
-```
-
+Bashdocker-compose up --build
 Esto levantará:
 
-- Contenedor **MariaDB**
-- Contenedor **PHP + Apache**
-- Inicialización automática de la base de datos con datos de ejemplo
+Contenedor MariaDB
+Contenedor PHP + Apache
+Inicialización automática de la base de datos con datos de ejemplo
 
 Accede a la aplicación en:
+texthttp://localhost:8080
 
-```
-http://localhost:8080
-```
+🔐 Usuarios de prueba
 
----
 
-## 🔐 Usuarios de prueba
 
-| Usuario        | Correo           | Contraseña        |
-|----------------|------------------|-------------------|
-| admin          | admin@admin.com  | 12345             |
-| maria_racing   | maria@usuario.com| 12345             |
-| juan_speed     | juan@usuario.com | 12345             |
 
----
 
-## 🧩 Funcionalidades
 
-### ✔ Autenticación
-- Registro de usuarios  
-- Inicio de sesión  
-- Cierre de sesión  
-- Protección de rutas mediante sesiones  
 
-### ✔ CRUD de vehículos
-- Crear vehículos  
-- Listar vehículos  
-- Editar vehículos  
-- Eliminar vehículos  
 
----
 
-Reiniciar todo desde cero (incluye borrar volúmenes):
 
-```bash
-docker-compose down -v
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+UsuarioCorreoContraseñaadminadmin@valorant.comAdmin2026!jettfanjett@valorant.comJett2026!phoenixgodphoenix@valorant.comPhoenix2026!
+
+🧩 Funcionalidades
+✔ Autenticación
+
+Registro de usuarios
+Inicio de sesión
+Cierre de sesión
+Protección de rutas mediante sesiones
+
+✔ CRUD de agentes
+
+Crear agentes
+Listar agentes
+Editar agentes
+Eliminar agentes
+
+
+🔄 Reiniciar todo desde cero (borra volúmenes)
+Bashdocker-compose down -v
 docker-compose up --build
-```
-
-Ver logs:
-
-```bash
-docker-compose logs -f
-```
-
----
+Ver logs en tiempo real:
+Bashdocker-compose logs -f
