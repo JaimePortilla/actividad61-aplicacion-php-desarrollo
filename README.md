@@ -88,52 +88,37 @@ Inicialización automática de la base de datos con datos de ejemplo
 Accede a la aplicación en:
 texthttp://localhost:8080
 
-🔐 Usuarios de prueba
+## 🔐 Usuarios de prueba
+
+| Usuario     | Correo                | Contraseña     |
+|------------|-----------------------|---------------|
+| admin      | admin@valorant.com    | Admin2026!    |
+| jettfan    | jett@valorant.com     | Jett2026!     |
+| phoenixgod | phoenix@valorant.com  | Phoenix2026!  |
+
+## 🧩 Funcionalidades
+
+### ✔ Autenticación
+
+- Registro de usuarios
+- Inicio de sesión
+- Cierre de sesión
+- Protección de rutas mediante sesiones
+
+### ✔ CRUD de agentes
+
+- Crear agentes
+- Listar agentes
+- Editar agentes
+- Eliminar agentes
 
 
+---
 
+## 🔄 Reiniciar todo desde cero (borra volúmenes)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-UsuarioCorreoContraseñaadminadmin@valorant.comAdmin2026!jettfanjett@valorant.comJett2026!phoenixgodphoenix@valorant.comPhoenix2026!
-
-🧩 Funcionalidades
-✔ Autenticación
-
-Registro de usuarios
-Inicio de sesión
-Cierre de sesión
-Protección de rutas mediante sesiones
-
-✔ CRUD de agentes
-
-Crear agentes
-Listar agentes
-Editar agentes
-Eliminar agentes
-
-
-🔄 Reiniciar todo desde cero (borra volúmenes)
-Bashdocker-compose down -v
+```bash
+docker-compose down -v
 docker-compose up --build
-Ver logs en tiempo real:
-Bashdocker-compose logs -f
+docker-compose logs -f
+```
