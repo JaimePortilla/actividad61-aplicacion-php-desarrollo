@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    image: mariadb:8
+    image: mariadb:11
     container_name: valorant_db
     env_file: .env
     environment:

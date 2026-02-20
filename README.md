@@ -71,10 +71,10 @@ Incluye **datos de ejemplo** para ambas tablas (10 agentes + 3 usuarios).
 Debe estar en la raíz del proyecto:
 
 ```env
-MYSQL_ROOT_PASSWORD=SamuelSaez@2006
+MYSQL_ROOT_PASSWORD=JaimePortilla@2006
 MYSQL_DATABASE=valorant2026
-MYSQL_USER=usuarioSaSa
-MYSQL_PASSWORD=SamuelSaez@2006
+MYSQL_USER=JaimePortilla
+MYSQL_PASSWORD=JaimePortilla@2006
 
 ▶️ Puesta en marcha
 Ejecuta:
