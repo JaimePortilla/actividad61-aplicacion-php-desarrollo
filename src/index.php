@@ -3,7 +3,6 @@
 session_start();
 include_once("config.php");
 
-// Si el usuario ya ha iniciado sesión se le redirige a la página home.php
 if (isset($_SESSION['username'])) {
     header("Location: home.php");
     exit();
@@ -14,92 +13,154 @@ if (isset($_SESSION['username'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VALORANT - Agent Database</title>
+    <title>VALORANT // AGENT HUB</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --val-red: #ff4655;
+            --val-dark: #0f1923;
+            --val-blue: #00eeff;
+        }
+
         body {
-            /* Sugerencia: Asegúrate de tener una imagen de Valorant en esta ruta */
-            background-image: url('img/valorant_bg.jpg'); 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            min-height: 100vh;
+            background: var(--val-dark);
+            color: #ece8e1;
+            font-family: 'Rajdhani', sans-serif;
+            margin: 0;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            height: 100vh;
         }
-        .welcome-card {
-            background-color: rgba(255, 255, 255, 0.95); /* Blanco con ligera transparencia */
-            border-radius: 5px; /* Bordes más rectos estilo Valorant */
-            padding: 40px;
-            text-align: center;
-            max-width: 600px;
-            width: 90%;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            border-left: 5px solid #ff4655; /* El rojo característico de Valorant */
+
+        /* Capa de fondo con efecto de escaneo */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(15, 25, 35, 0.7), rgba(15, 25, 35, 0.7)), url('img/valorant_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
         }
-        .logo-main {
-            width: 100px;
-            height: auto;
-            margin-bottom: 20px;
+
+        .main-container {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 25, 35, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            position: relative;
+            max-width: 500px;
+            width: 100%;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 90% 100%, 0 100%); /* Esquina cortada estilo Riot */
         }
-        h1 {
-            color: #0f1923; /* Azul muy oscuro de Valorant */
-            font-weight: 900;
-            margin-bottom: 15px;
+
+        .accent-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background: var(--val-red);
+        }
+
+        .glitch-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
             text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 5px;
+            color: white;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            color: var(--val-blue);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+            display: block;
+        }
+
+        .btn-val {
+            border-radius: 0;
+            padding: 15px 25px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-login {
+            background: var(--val-red);
+            color: white;
+            border: none;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .btn-login:hover {
+            background: white;
+            color: var(--val-dark);
+        }
+
+        .btn-reg {
+            background: transparent;
+            color: white;
+            width: 100%;
+        }
+
+        .btn-reg:hover {
+            background: rgba(255,255,255,0.1);
+            color: var(--val-blue);
+        }
+
+        .footer-text {
+            margin-top: 40px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
             letter-spacing: 2px;
         }
-        .btn-custom {
-            padding: 12px 30px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            border-radius: 0; /* Botones cuadrados estilo Riot */
-        }
-        .btn-valorant-red {
-            background-color: #ff4655;
-            border: none;
-            color: white;
-        }
-        .btn-valorant-red:hover {
-            background-color: #0f1923;
-            color: white;
-        }
-        footer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-            font-size: 0.85rem;
-            color: #555;
+
+        /* Elemento decorativo extra */
+        .decor {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.6rem;
+            color: var(--val-red);
         }
     </style>
 </head>
 <body>
 
-<div class="welcome-card">
+<div class="main-container">
+    <div class="accent-line"></div>
+    
     <header>
-        <img src="html/valorant_logo.png" alt="Valorant Logo" class="logo-main">
-        <h1>Protocolo VALORANT</h1>
-        <p class="text-muted mb-4">Base de datos de Agentes. Acceso restringido a personal autorizado.</p>
+        <span class="subtitle">Secure Connection // Database</span>
+        <h1 class="glitch-title">VALORANT<br>AGENTS</h1>
     </header>
 
-    <main>
-        <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-            <a href="login.php" class="btn btn-valorant-red btn-custom shadow-sm">Iniciar Sesión</a>
-            <a href="registro.php" class="btn btn-dark btn-custom shadow-sm">Registrar Recluta</a>
-        </div>
-    </main>
+    <div class="mt-4">
+        <a href="login.php" class="btn btn-val btn-login">Iniciar Sesión</a>
+        <a href="registro.php" class="btn btn-val btn-reg">Registrar Usuario</a>
+    </div>
 
-    <footer>
-        <p class="mb-0">Sistema desarrollado por <strong>Jaime Portilla Pérez</strong></p>
+    <footer class="footer-text">
+        Identificador: J.PORTILLA // ACCESO NIVEL 4
     </footer>
+
+    <div class="decor">VLRNT_SYS_2026</div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
