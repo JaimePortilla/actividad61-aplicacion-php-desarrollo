@@ -1,28 +1,40 @@
 version: '3.8'
 
 services:
-  db:
-    image: mariadb:11
+  db:                          # ← Nombre importante: "mariadb" (así lo espera tu código)
+    image: mariadb:10.11
     container_name: valorant_db
     env_file: .env
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
     volumes:
+      - db_data:/var/lib/mysql
       - ./sql/database.sql:/docker-entrypoint-initdb.d/database.sql
     ports:
       - "3306:3306"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   web:
-    build: .
+    image: jaimeportilla/actividad61-aplicacion-crud-php:latest
     container_name: valorant_web
     depends_on:
-      - db
+      db:
+        condition: service_healthy      # ← Espera a que la BD esté realmente lista
     env_file: .env
     volumes:
       - ./src:/var/www/html
       - ./conf/000-default.conf:/etc/apache2/sites-available/000-default.conf
     ports:
-      - "8080:80"
+      - "80:80"
+    restart: unless-stopped
+
+volumes:
+  db_data:

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,58 +8,66 @@
 <body>
 <div>
 	<header>
-		<h1>APLICACION CRUD VALORANT</h1>
+		<h1>APLICACION CRUD PHP</h1>
 	</header>
 	<main>				
 	<h2>Alta</h2>
-<!--FORMULARIO DE ALTA. Al hacer click en el botón Agregar, llama a la página: add_action.php (form action="add_action.php")
-La página: add_action.php se encargará de proceder a la inserción del registro en la tabla de agentes
+<!--FORMULARIO DE ALTA. Al hacer click en el botón Agregar, llama a la página: add.php (form action="add.php")
+La página: add.php se encargará de proceder a la inserción del registro en la tabla de empleados
 -->
 
-	<form action="add_action.php" method="post">
+	<form action="add_action.html" method="post">
 		<div>
-			<label for="nombre">Nombre</label>
-			<input type="text" name="nombre" id="nombre" placeholder="nombre del agente" required>
+			<label for="email">Correo</label>
+			<input type="email" name="email" id="email" placeholder="correo electrónico" required>
 		</div>
 		<div>
-			<label for="rol">Rol</label>
-			<select name="rol" id="rol" placeholder="rol">
-				<option value="" disabled selected>Seleccione un rol</option>
-				<option value="Duelist">Duelist</option>
-				<option value="Controller">Controller</option>
-				<option value="Sentinel">Sentinel</option>
-				<option value="Initiator">Initiator</option>
+			<label for="username">Usuario</label>
+			<input type="text" name="username" id="username" placeholder="nombre usuario" required>
+		</div>
+		<div>
+			<label for="name">Contraseña</label>
+			<input type="password" name="password" id="password" placeholder="contraseña" required>
+		</div>
+		<div>
+			<label for="name">Nombre</label>
+			<input type="text" name="name" id="name" placeholder="nombre">
+		</div>
+
+		<div>
+			<label for="surname">Apellido</label>
+			<input type="text" name="surname" id="surname" placeholder="apellido">
+		</div>
+
+		<div>
+			<label for="age">Edad</label>
+			<input type="number" name="age" id="age" placeholder="edad">
+		</div>
+
+		<div>
+			<label for="job">Puesto</label>
+			<select name="job" id="job" placeholder="puesto">
+				<option value="" disabled selected>Seleccione un puesto</option>
+				<option value="administrativo">administrativo</option>
+				<option value="contable">contable</option>
+				<option value="dependiente">dependiente</option>
+				<option value="empleado">empleado</option>
+				<option value="gerente">gerente</option>
+				<option value="repartidor">repartidor</option>
+				<option value="repartidor">usuario</option>
 			</select>	
-		</div>
-		<div>
-			<label for="pais">País</label>
-			<input type="text" name="pais" id="pais" placeholder="país de origen" required>
-		</div>
-		<div>
-			<label for="anio_lanzamiento">Año de lanzamiento</label>
-			<input type="number" name="anio_lanzamiento" id="anio_lanzamiento" placeholder="año de lanzamiento" required>
-		</div>
-
-		<div>
-			<label for="dificultad">Dificultad</label>
-			<input type="number" name="dificultad" id="dificultad" placeholder="dificultad (1-5)" required min="1" max="5">
-		</div>
-
-		<div>
-			<label for="ultimate">Ultimate</label>
-			<input type="text" name="ultimate" id="ultimate" placeholder="nombre del ultimate" required>
 		</div>
 
 		<div>
 			<button type="submit" name="inserta" value="si">Aceptar</button>
-			<button type="button" onclick="location.href='home.php'">Cancelar</button>
+			<button type="button" onclick="location.href='home.html'">Cancelar</button>
 		</div>
 	</form>
 	
 	</main>	
 	<footer>
-		<p><a href="home.php">Volver</a></p>	
-		<p><a href="logout.php">Cerrar sesión (Sign out)</a></p>
+		<p><a href="home.html">Volver</a></p>	
+		<p><a href="logout.html">Cerrar sesión (Sign out)</a></p>
 		Created by the IES Miguel Herrero team &copy; 2026
   	</footer>
 </div>
