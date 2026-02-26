@@ -3,13 +3,12 @@ name: CI/CD - Build, Push & Deploy CRUD App
 on:
   push:
     branches:
-      - main
+      - master # Asegúrate de que tu rama se llame master y no main
 
 jobs:
   build-and-push:
     name: Build & Push Docker Image
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout del código
         uses: actions/checkout@v4
@@ -18,7 +17,7 @@ jobs:
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Construir y etiquetar la imagen (BUILD)
         run: |
@@ -26,6 +25,7 @@ jobs:
 
       - name: Subir imagen a Docker Hub (PUSH)
         run: |
+          # CORREGIDO: DOCKERHUB_USERNAME -> DOCKER_USERNAME
           docker push ${{ secrets.DOCKER_USERNAME }}/lamp-crud-app:latest
 
   deploy:
@@ -37,12 +37,13 @@ jobs:
       - name: Despliegue en servidor de producción
         uses: appleboy/ssh-action@v1.2.1
         with:
+          # CORREGIDOS PARA COINCIDIR CON TU CAPTURA:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22 # Si no tienes SSH_PORT en secretos, ponlo manual o créalo
           script: |
-            cd ~/repositorios/actividad61-aplicacion-php-produccion
+            cd ~/actividad61-aplicacion-php-produccion
             docker compose down
             docker compose pull
             docker compose up -d
