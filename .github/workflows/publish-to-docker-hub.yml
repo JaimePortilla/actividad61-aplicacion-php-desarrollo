@@ -1,4 +1,4 @@
-name: CI/CD - Build, Push & Deploy Valorant
+name: CI/CD - Build, Push & Deploy
 
 on:
   push:
@@ -28,6 +28,7 @@ jobs:
           tags: jaimeportilla/actividad61-aplicacion-crud-php:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          no-cache: true
 
   deploy:
     needs: build-and-push
@@ -41,7 +42,10 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
+            docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin <<< "${{ secrets.DOCKER_TOKEN }}"
             cd ~/actividad61-aplicacion-php-produccion
-            docker-compose pull
-            docker-compose up -d --force-recreate
+            docker-compose down --remove-orphans
+            docker-compose pull --ignore-pull-failures
+            docker-compose up -d --force-recreate --build
+            docker system prune -f
             echo "✅ Deploy completado - $(date)"
