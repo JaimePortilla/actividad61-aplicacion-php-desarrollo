@@ -43,6 +43,6 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd ~/repositorios/actividad61-aplicacion-php-produccion
-            docker compose down
-            docker compose pull
-            docker compose up -d
+            docker-compose down
+            docker-compose pull
+            docker-compose up -d
