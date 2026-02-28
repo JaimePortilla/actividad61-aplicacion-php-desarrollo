@@ -3,8 +3,7 @@ name: CI/CD - Build, Push & Deploy CRUD App
 on:
   push:
     branches:
-      - main   # Cambiado a main (tu rama)
-  workflow_dispatch:  # Para ejecutar manual
+      - master
 
 jobs:
   build-and-push:
@@ -22,7 +21,7 @@ jobs:
 
       - name: Construir y etiquetar la imagen (BUILD)
         run: |
-          docker build --no-cache -t ${{ secrets.DOCKER_USERNAME }}/lamp-crud-app:latest .
+          docker build --no-cache -t ${{ secrets.DOCKER_USERNAME }}/lamp-crud-app:latest .  # Agrega --no-cache aquí
 
       - name: Subir imagen a Docker Hub (PUSH)
         run: |
@@ -43,6 +42,6 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd ~/actividad61-aplicacion-php-produccion
-            sudo docker compose down
-            sudo docker compose pull
-            sudo docker compose up -d --force-recreate
+            docker compose down
+            docker compose pull
+            docker compose up -d
