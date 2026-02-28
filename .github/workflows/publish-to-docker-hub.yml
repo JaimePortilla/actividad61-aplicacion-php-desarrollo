@@ -3,7 +3,7 @@ name: CI/CD - Build, Push & Deploy CRUD App
 on:
   push:
     branches:
-      - main
+      - main  # Asegúrate de que sea main, no master
 
 jobs:
   build-and-push:
@@ -41,7 +41,11 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
+            docker login -u $$   {{ secrets.DOCKER_USERNAME }} --password-stdin <<< "   $${{ secrets.DOCKER_TOKEN }}"  # Agrega login si repo privado
             cd ~/actividad61-aplicacion-php-produccion
-            docker compose down
+            docker compose down -v --remove-orphans  # Limpieza completa
+            docker rmi ${{ secrets.DOCKER_USERNAME }}/lamp-crud-app:latest || true  # Remueve imagen vieja
             docker compose pull
-            docker compose up -d
+            docker compose up -d --force-recreate
+            docker system prune -f  # Limpia caches extras
+            echo "Deploy completado"
