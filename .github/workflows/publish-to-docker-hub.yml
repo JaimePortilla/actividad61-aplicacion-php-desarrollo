@@ -3,12 +3,13 @@ name: CI/CD - Build, Push & Deploy CRUD App
 on:
   push:
     branches:
-      - main  # Asegúrate de que sea main, no master
+      - main
 
 jobs:
   build-and-push:
     name: Build & Push Docker Image
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout del código
         uses: actions/checkout@v4
@@ -17,7 +18,7 @@ jobs:
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_TOKEN }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Construir y etiquetar la imagen (BUILD)
         run: |
@@ -38,14 +39,10 @@ jobs:
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
           script: |
-            docker login -u $$   {{ secrets.DOCKER_USERNAME }} --password-stdin <<< "   $${{ secrets.DOCKER_TOKEN }}"  # Agrega login si repo privado
             cd ~/actividad61-aplicacion-php-produccion
-            docker compose down -v --remove-orphans  # Limpieza completa
-            docker rmi ${{ secrets.DOCKER_USERNAME }}/lamp-crud-app:latest || true  # Remueve imagen vieja
+            docker compose down
             docker compose pull
-            docker compose up -d --force-recreate
-            docker system prune -f  # Limpia caches extras
-            echo "Deploy completado"
+            docker compose up -d
