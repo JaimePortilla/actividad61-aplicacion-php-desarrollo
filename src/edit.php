@@ -29,7 +29,8 @@ if (!$agente) {
 </head>
 <body>
 <div class="container py-5">
-    <h1 class="mb-4">Editar agente #<?php echo $agente['agente_id']; ?></h1>
+    <h1 class="mb-4">Editar agente</h1>
+    <p class="text-muted">ID: <?php echo $agente['agente_id']; ?></p>
     <p><a href="home.php" class="btn btn-secondary mb-3">Volver al listado</a></p>
 
     <form action="edit_action.php?id=<?php echo $agente['agente_id']; ?>" method="post" class="row g-3">
@@ -47,18 +48,18 @@ if (!$agente) {
         </div>
         <div class="col-md-6">
             <label class="form-label">Año de lanzamiento:</label>
-            <input type="number" name="anio_lanzamiento" value="<?php echo $agente['anio_lanzamiento']; ?>" class="form-control" required>
+            <input type="number" name="anio_lanzamiento" value="<?php echo htmlspecialchars($agente['anio_lanzamiento']); ?>" class="form-control" required>
         </div>
         <div class="col-md-6">
             <label class="form-label">Dificultad (1-5):</label>
-            <input type="number" name="dificultad" value="<?php echo $agente['dificultad']; ?>" class="form-control" required>
+            <input type="number" name="dificultad" value="<?php echo htmlspecialchars($agente['dificultad']); ?>" class="form-control" required>
         </div>
         <div class="col-md-6">
             <label class="form-label">Ultimate:</label>
             <input type="text" name="ultimate" value="<?php echo htmlspecialchars($agente['ultimate']); ?>" class="form-control" required>
         </div>
         <div class="col-12">
-            <button type="submit" class="btn btn-primary">Actualizar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
     </form>
 </div>
