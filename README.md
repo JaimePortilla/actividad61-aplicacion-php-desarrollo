@@ -17,6 +17,8 @@ Permite gestionar usuarios y **agentes de Valorant** (temporada 2026).
 ---
 
 ## 📁 Estructura del proyecto
+
+```
 conf/
 └── 000-default.conf
 docker-compose.yml
@@ -38,8 +40,10 @@ src/
 ├── logout.php
 ├── registro.php
 └── registro_action.php
-text---
+text
 
+```
+---
 ## 🗄 Base de datos
 
 El archivo `sql/database.sql` crea la base de datos **valorant2026** con:
