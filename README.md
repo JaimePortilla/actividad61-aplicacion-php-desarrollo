@@ -40,6 +40,7 @@ src/
 ├── logout.php
 ├── registro.php
 └── registro_action.php
+
 ```
 ---
 ## 🗄 Base de datos
