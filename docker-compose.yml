@@ -1,5 +1,5 @@
 version: '3.8'
- 
+  
 services:
   db:                          # ← Nombre importante: "mariadb" (así lo espera tu código)
     image: mariadb:10.11
