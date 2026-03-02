@@ -12,7 +12,7 @@ services:
       - MARIADB_PASSWORD=${MARIADB_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
-      - ./sql/database.sql:/docker-entrypoint-initdb.d/database.sql
+      - ./sql:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
     restart: unless-stopped
@@ -31,7 +31,6 @@ services:
     env_file: .env
     volumes:
       - ./src:/var/www/html
-      - ./conf/000-default.conf:/etc/apache2/sites-available/000-default.conf
     ports:
       - "80:80"
     restart: unless-stopped
