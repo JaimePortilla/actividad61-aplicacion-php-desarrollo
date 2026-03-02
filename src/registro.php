@@ -32,6 +32,10 @@ session_start();
             <label class="form-label">Contraseña:</label>
             <input type="password" name="contraseña" class="form-control" required>
         </div>
+        <div class="col-md-6">
+            <label class="form-label">Repetir contraseña:</label>
+            <input type="password" name="contraseña2" class="form-control" required>
+        </div>
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Registrarse</button>
         </div>
